@@ -1,0 +1,8 @@
+# Versions below are the ones the results in this repository were produced with (Python 3.13).
+# Older releases of the same major version are expected to work, but were not tested.
+numpy>=2.0        # tested 2.5.3
+scipy>=1.13       # tested 1.18.1
+pandas>=2.2       # tested 3.0.5
+matplotlib>=3.8   # tested 3.11.2
+# only needed to rebuild presentation/presentation.pptx:
+python-pptx>=1.0  # tested 1.0.2

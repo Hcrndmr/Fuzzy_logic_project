@@ -1,0 +1,54 @@
+     geo          controller   mean    std    min     max
+0   3leg             FPA-TSC  36.25  29.60  10.60  100.77
+1   3leg  FixedTime(Webster)  36.29  29.85  10.60  101.35
+2   3leg         IT2-FL(CSA)  33.68  29.45   8.62   98.80
+3   3leg     IT2-FL(CSA)+PSS  32.73  29.13   8.32   97.29
+4   3leg  IT2-FL(uniform MF)  36.76  27.52   9.23   98.49
+5   3leg          T1-FL(CSA)  33.36  29.13   8.97   98.45
+6   3leg   T1-FL(uniform MF)  36.89  27.57   9.23   98.54
+7   4leg             FPA-TSC  78.83  62.56  16.03  186.76
+8   4leg  FixedTime(Webster)  79.95  64.04  16.03  188.56
+9   4leg         IT2-FL(CSA)  74.87  63.24  13.27  184.49
+10  4leg     IT2-FL(CSA)+PSS  73.56  62.72  12.92  182.67
+11  4leg  IT2-FL(uniform MF)  79.38  59.85  13.42  184.95
+12  4leg          T1-FL(CSA)  74.85  63.48  13.26  185.21
+13  4leg   T1-FL(uniform MF)  79.45  59.82  13.42  184.98
+     geo comparison  ours_%  paper_% (HTSC)
+0   3leg     FT->T1   10.40            8.64
+1   3leg    FT->FPA   -0.42           10.73
+2   3leg    FT->IT2   10.32           11.59
+3   3leg    T1->FPA  -12.35            1.67
+4   3leg    T1->IT2   -0.09            2.70
+5   3leg   FPA->IT2   10.68            0.80
+6   4leg     FT->T1   10.66           19.81
+7   4leg    FT->FPA    0.55           20.27
+8   4leg    FT->IT2   10.32           23.99
+9   4leg    T1->FPA  -12.11            0.42
+10  4leg    T1->IT2   -0.46            5.26
+11  4leg   FPA->IT2    9.67            4.83
+    geo    chi2    p  rank[FixedTime(Webster)]  rank[FPA-TSC]  rank[T1-FL(CSA)]  rank[IT2-FL(CSA)]
+0  3leg  22.159  0.0                     3.444          3.556             1.444              1.556
+1  4leg  22.416  0.0                     3.722          3.278             1.556              1.444
+     geo        scenario       T1      IT2  IT2_vs_T1_%  p(IT2 vs T1)  FPA-TSC  IT2_vs_FPA_%  p(IT2 vs FPA)
+0   3leg    low_equal100    8.969    8.624        3.847         0.312   10.602        18.657          0.001
+1   3leg    low_equal400   12.584   11.834        5.960         0.009   13.758        13.988          0.000
+2   3leg       low_mixed    9.914   10.208       -2.962         0.261   12.461        18.084          0.000
+3   3leg    med_equal500   16.188   15.417        4.765         0.231   17.395        11.371          0.000
+4   3leg    med_equal800   30.215   31.927       -5.664         0.002   34.578         7.669          0.000
+5   3leg       med_mixed   26.836   27.999       -4.334         0.006   31.202        10.263          0.000
+6   3leg   high_equal900   39.467   39.348        0.301         0.648   43.035         8.566          0.000
+7   3leg  high_equal1200   98.453   98.798       -0.351         0.475  100.770         1.957          0.006
+8   3leg      high_mixed   57.628   59.002       -2.385         0.004   62.451         5.522          0.000
+9   4leg    low_equal100   13.261   13.268       -0.055         0.985   16.030        17.228          0.000
+10  4leg    low_equal400   22.402   22.260        0.633         0.522   24.683         9.817          0.000
+11  4leg       low_mixed   17.129   17.751       -3.627         0.053   21.427        17.158          0.000
+12  4leg    med_equal500   27.294   27.791       -1.821         0.245   36.340        23.526          0.000
+13  4leg    med_equal800   84.598   85.396       -0.944         0.330   89.239         4.306          0.000
+14  4leg       med_mixed   58.770   58.084        1.168         0.036   63.772         8.920          0.000
+15  4leg   high_equal900  110.955  110.873        0.074         0.784  114.290         2.990          0.000
+16  4leg  high_equal1200  185.208  184.491        0.387         0.011  186.763         1.217          0.000
+17  4leg      high_mixed  154.008  153.910        0.064         0.985  156.894         1.902          0.000
+controller  T1-FL(uniform MF)  T1-FL(CSA)  IT2-FL(uniform MF)  IT2-FL(CSA)  IT2-FL(CSA)+PSS
+geo                                                                                        
+3leg                    36.89       33.36               36.76        33.68            32.73
+4leg                    79.45       74.85               79.38        74.87            73.56

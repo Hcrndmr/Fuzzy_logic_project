@@ -1,0 +1,7 @@
+finished in 2309 s
+done in 8 s
+                       system  inference_us_per_call  sim_ms_per_900s_run
+0               Type-1 Sugeno                  14.48                 0.75
+1  IT2 Sugeno (Karnik-Mendel)                  51.31                 2.19
+2        IT2 Sugeno (Nie-Tan)                  34.65                 1.45
+3   Fixed time (no inference)                   0.00                 0.23

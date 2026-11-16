@@ -1,0 +1,100 @@
+\section{Introduction}
+Delays at signalised intersections are a major component of urban travel time, and a fixed-time plan cannot follow the random
+fluctuation of arrivals. Fuzzy logic is a natural tool here: ``few'', ``many'', ``short queue'' and ``long queue'' are linguistic
+statements that traffic engineers already use, and a rule base can turn them into a green-time decision without an analytical model of
+the traffic stream. Korkmaz and Ak{\"g}{\"u}ng{\"o}r \cite{ref_paper} combine this idea with two metaheuristics: the flower pollination
+algorithm (FPA) selects the phase plan and cycle length, and an interval Type-2 Sugeno fuzzy system whose membership functions (MFs)
+are tuned by the crow search algorithm (CSA) lengthens or shortens the next green by up to $\pm 6$~s. The resulting hybrid controller (HTSC)
+is reported to reduce delay by about 32\% against fixed-time control and by 5--6\% against an FPA-only controller and a Type-1 fuzzy controller.
+
+\textbf{Goal of this project.} The reference code and the simulator (KU-Trsim) are not public. The project therefore (i) re-implements the fuzzy
+green-time part of the method from the paper description, in a simulator written for this study, (ii) re-runs the paper's main
+experiment (nine demand scenarios, 20 random seeds, fixed-time versus FPA versus Type-1 versus Type-2 control), and (iii) adds three
+controlled extensions that the paper does not contain: a comparison of four optimisers for the Type-2 MFs, a detector-noise robustness
+study, and a comparison of type-reduction methods together with computational cost.
+
+\textbf{Summary of findings.} Tuned fuzzy controllers reduce delay by about 10\% against fixed-time control, which is of the same order as the
+paper's Type-1 result for three legs (8.6\%) but lower than for four legs (19.8\%). The additional benefit of interval Type-2 over Type-1 reported by the paper was \emph{not} reproduced in our
+setting (Section~\ref{sec:results}). The report states which differences between our set-up and the paper may explain this, and every number in the
+tables is produced by the code in the accompanying repository.
+
+\section{Related Work}
+Fuzzy traffic signal control has been studied for more than two decades; surveys are given in \cite{koukol2015,agrahari2024}.
+Table~\ref{tab:related} lists the studies most closely related to the reference paper, with results as they are summarised in the
+introduction of \cite{ref_paper} (these figures come from different simulators and baselines and are not directly comparable).
+Early controllers used Type-1 fuzzy sets, either to extend the current green \cite{trabia1999} or with MFs and rules tuned by
+particle swarm optimisation \cite{chen2006} or differential evolution (DE) \cite{dogan2016}. Type-2 controllers followed because traffic
+data are noisy: Balaji and Srinivasan \cite{balaji2009} used a multi-agent Type-2 architecture, Bi \emph{et al.} \cite{bi2014} tuned
+Type-2 MFs and rules with DE, Araghi \emph{et al.} \cite{araghi2017} compared cuckoo search, GA and simulated annealing for an
+interval Type-2 ANFIS controller, and Khooban \emph{et al.} \cite{khooban2017} optimised a general Type-2 controller with a modified
+backtracking search. The same authors as the reference paper showed earlier that FPA alone can optimise phase plan, sequence and green
+times \cite{korkmaz2021a}. More recent work combines fuzzy systems with learning: Bi \emph{et al.} \cite{bi2024} let a Type-2 fuzzy
+controller set the phase green time inside a Deep Q-Network on a single intersection (SUMO simulation), and the 2022 studies cited in \cite{ref_paper}
+use fuzzy control with DE \cite{lin2022}, CNN-LSTM \cite{islam2022} or reinforcement learning \cite{zhao2022}. The review \cite{agrahari2024}
+notes that more work is needed beyond the single-intersection setting.
+
+\begin{table}[t]
+\centering\small
+\caption{Closely related studies (results as summarised in \cite{ref_paper}, except the last row).}\label{tab:related}
+\begin{tabular}{@{}p{3.2cm}p{2.7cm}p{2.1cm}p{5.6cm}@{}}
+\toprule
+Study & Fuzzy type & Optimiser & Reported effect \\ \midrule
+Trabia \emph{et al.} 1999 \cite{trabia1999} & Type-1, two-stage & -- & 9.5\% less delay than actuated control \\
+Chen \& Xu 2006 \cite{chen2006} & Type-1 (MFs+rules) & PSO & large delay reduction under time-varying demand \\
+Balaji \& Srinivasan 2009 \cite{balaji2009} & Type-2, multi-agent & -- & about 66\% less delay (Singapore data) \\
+Bi \emph{et al.} 2014 \cite{bi2014} & Type-2 (MFs+rules) & DE & less delay/queue/stops than Type-1 and fixed \\
+Do{\u g}an \& Ak{\"g}{\"u}ng{\"o}r 2016 \cite{dogan2016} & Type-1 & DE & 52/48/14\% (low/medium/high demand) \\
+Araghi \emph{et al.} 2017 \cite{araghi2017} & interval Type-2 ANFIS & CS, GA, SA & 31/17/3\% vs fixed time \\
+Khooban \emph{et al.} 2017 \cite{khooban2017} & general Type-2 & MBSA & less queue and delay than Type-1 and fixed \\
+Korkmaz \& Ak{\"g}{\"u}ng{\"o}r 2021 \cite{korkmaz2021a} & -- (phase/green) & FPA & 12--30\% vs fixed, 0.8--3\% vs fuzzy \\
+Korkmaz \& Ak{\"g}{\"u}ng{\"o}r 2024 \cite{ref_paper} & interval Type-2 Sugeno & FPA + CSA & about 32\% vs fixed, 5--6\% vs FPA/Type-1 \\
+Bi \emph{et al.} 2024 \cite{bi2024} & Type-2 + DQN & DQN & improved flow in SUMO (no figure checked) \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Gap addressed here.} The papers above tune Type-2 controllers with one metaheuristic at a time and mostly report noise-free
+simulation. It is therefore not clear (a) whether CSA is a good choice compared with FPA, PSO and DE under an \emph{equal} evaluation budget,
+and (b) whether the footprint of uncertainty of a Type-2 system actually buys robustness against detector errors, which is the main argument
+for Type-2 in traffic control. These two questions are the proposed extension of this project.
+
+\section{Theoretical Background}
+\subsection{Fuzzy sets, linguistic variables and Sugeno inference}
+A fuzzy set $A$ on a universe $X$ is described by a membership function $\mu_A: X\to[0,1]$ \cite{zadeh1965}; a linguistic variable
+takes values such as \emph{low}, \emph{normal}, \emph{high} that are each modelled by such a set \cite{zadeh1975}. In this work every
+input uses triangular MFs $\mu(x)=\max\{0,\min[(x-c+w_l)/w_l,\;(c+w_r-x)/w_r]\}$ with apex $c$ and legs $w_l,w_r$. A zero-order Sugeno system
+\cite{takagi1985} has rules ``IF $x_1$ is $A_i$ AND $x_2$ is $B_j$ THEN $y=z_{ij}$'' with crisp consequents. With the minimum t-norm,
+the firing strength is $w_{ij}=\min\{\mu_{A_i}(x_1),\mu_{B_j}(x_2)\}$ and the output is the weighted average
+\begin{equation}\label{eq:sugeno}
+y=\frac{\sum_{r} w_r z_r}{\sum_{r} w_r}.
+\end{equation}
+Fuzzification, rule evaluation and this weighted average (which replaces a separate defuzzification stage in Sugeno systems) are the
+three stages of the Type-1 controller.
+
+\subsection{Interval Type-2 fuzzy logic}
+An interval Type-2 set is bounded by an upper MF $\bar\mu_A$ and a lower MF $\underline\mu_A$; the region between them is the
+footprint of uncertainty (FOU) \cite{liang2000,mendel2017}. The rule firing strength is now an interval
+$[\underline w_r,\bar w_r]$ obtained by applying the t-norm to the lower and to the upper memberships. The output of a Sugeno IT2 system is
+an interval $[y_l,y_r]$,
+\begin{equation}\label{eq:km}
+y_l=\min_{k}\frac{\sum_{i\le k}\bar w_i z_i+\sum_{i>k}\underline w_i z_i}{\sum_{i\le k}\bar w_i+\sum_{i>k}\underline w_i},\qquad
+y_r=\max_{k}\frac{\sum_{i\le k}\underline w_i z_i+\sum_{i>k}\bar w_i z_i}{\sum_{i\le k}\underline w_i+\sum_{i>k}\bar w_i},
+\end{equation}
+with the consequents sorted $z_1\le\dots\le z_R$. The iterative Karnik--Mendel (KM) procedure \cite{karnik2001} finds exactly these
+optimum switch points; here Eq.~\eqref{eq:km} is evaluated directly with prefix sums, which gives the same result and was checked
+against brute-force enumeration (\texttt{tests/test\_fuzzy.py}). The crisp output is $y=(y_l+y_r)/2$. The Nie--Tan method \cite{li2018nt}
+is a closed-form alternative, $y=\sum_i \tfrac12(\underline w_i+\bar w_i) z_i/\sum_i\tfrac12(\underline w_i+\bar w_i)$. When the FOU vanishes, the system
+reduces to the Type-1 system of Eq.~\eqref{eq:sugeno} (also tested).
+
+\subsection{Metaheuristics used}
+All four optimisers search the unit cube $[0,1]^D$ of encoded MF parameters and minimise the mean delay.
+\textbf{CSA} \cite{askarzadeh2016}: crow $i$ follows a random crow $j$ towards its memory $m_j$,
+$x_i\leftarrow x_i+r_i\,fl\,(m_j-x_i)$ if $r_j\ge AP$, otherwise it moves to a random position; the memory is updated if the new position is better
+($AP=0.05$, $fl=2$ as in the reference paper). \textbf{FPA} \cite{yang2012}: with probability $p$ a global step
+$x_i\leftarrow x_i+\gamma L(\lambda)(g^*-x_i)$ with L\'evy-distributed step $L$ (Mantegna's algorithm \cite{mantegna1994}), otherwise a local step
+$x_i\leftarrow x_i+\epsilon(x_j-x_k)$ ($p=0.8$, $\lambda=1.5$, $\gamma=0.1$). \textbf{PSO} \cite{kennedy1995} (constriction-type
+weights $w=0.7298$, $c_1=c_2=1.49618$) and \textbf{DE} \cite{storn1997} (rand/1/bin, $F=0.5$, $CR=0.9$) serve as widely used references.
+
+\subsection{Delay models}
+Webster's method \cite{webster1958} gives the cycle $C_0=(1.5L+5)/(1-Y)$ and green splits proportional to the critical flow ratios.
+The HCM control delay used as the FPA objective is $d=d_1\,PF+d_2+d_3$ with uniform delay $d_1=0.5C(1-g/C)^2/[1-\min(1,X)\,g/C]$ and incremental
+delay $d_2=900T[(X-1)+\sqrt{(X-1)^2+8kIX/(cT)}]$ \cite{hcm2000}.

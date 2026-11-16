@@ -1,0 +1,40 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{graphicx,booktabs,amsmath,amssymb,array,float}
+\usepackage[hidelinks]{hyperref}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{microtype}
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\titlespacing*{\subsection}{0pt}{6pt}{2pt}
+\setlength{\parskip}{3pt}
+\setlength{\parindent}{0pt}
+\graphicspath{{../results/figures/}{./}}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries Interval Type-2 Fuzzy Green-Time Control of a Signalised Intersection:\\[2pt]
+Re-implementation, Optimiser Comparison and Detector-Noise Robustness}\\[8pt]
+{\large Fuzzy Logic Course -- Term Project Report}\\[4pt]
+\textbf{Student:} [Full name]\quad \textbf{Student no.:} [number]\quad \textbf{Date:} November 2026\\[2pt]
+\textbf{Reference paper:} E.~Korkmaz and A.~P.~Akg{\"u}ng{\"o}r, \emph{Soft Computing} 28:7227--7249, 2024 \cite{ref_paper}\\[2pt]
+\textbf{Code:} \texttt{github.com/[user]/fuzzy-logic-project} (repository link to be filled in)
+\end{center}
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+\input{sec1_3}
+\input{sec4_7}
+\input{sec8_11}
+\input{sec_ai}
+\input{refs}
+
+\end{document}

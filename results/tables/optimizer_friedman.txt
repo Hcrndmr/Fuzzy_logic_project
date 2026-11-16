@@ -1,0 +1,1 @@
+Friedman chi2=33.000 p=0.0000 (18 scenarios x 4 optimisers)

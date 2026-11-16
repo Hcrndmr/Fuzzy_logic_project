@@ -1,0 +1,12 @@
+\section*{Generative AI Usage Disclosure}
+A generative AI assistant (Claude, Anthropic; used through the Claude app / Claude Code in November 2026) was used extensively in this project.
+\textbf{Code development:} the simulator, the fuzzy controllers, the four optimisers and the experiment and analysis scripts (\texttt{src/}, \texttt{experiments/}) were drafted by the assistant and then checked with
+unit tests (Karnik--Mendel against brute-force enumeration, Type-2 $\to$ Type-1 limit, rule-table monotonicity), by comparing the simulator with the HCM delay model, and by re-running the complete baseline experiment, which reproduced the stored results.
+\textbf{Debugging} and \textbf{concept explanation} (Type-2 sets, type reduction, the metaheuristics) were done with the assistant.
+\textbf{Literature search:} the assistant proposed related work. Entries copied from the reference list of the reference paper are cited only for what that paper reports about them;
+the other recent studies (Koukol, Agrahari, Bi 2024, Li \emph{et al.}) were looked up online and their bibliographic data were read from the publisher pages; textbook classics were cited from memory and are flagged in \texttt{references/README.md}.
+No reference was kept that could not be traced to one of these sources.
+\textbf{Writing:} the assistant drafted the report, the slides and the README, and edited the language.
+\textbf{Results:} every number in this report is produced by the code in the repository (result files in \texttt{results/}); no result of the reference paper was reused as our own, and the paper's numbers appear only in
+comparison columns that are labelled as such. The code of the reference paper's authors was not used (none is public).
+\emph{[Student: replace this sentence by a statement of your own about which parts you ran, read and can explain, as required by Section~15 of the project guideline.]}

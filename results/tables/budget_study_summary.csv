@@ -1,0 +1,9 @@
+geo,scenario,kind,iters,train_delay,test_delay,time_s,test_delay_100it
+3leg,med_equal800,t1,400,32.232,31.629,35.215,30.215
+3leg,med_equal800,it2,400,32.202,30.447,111.543,31.927
+3leg,high_mixed,t1,400,55.808,58.4,25.49,57.628
+3leg,high_mixed,it2,400,54.94,57.36,72.925,59.002
+4leg,med_equal500,t1,400,26.965,29.363,52.968,27.294
+4leg,med_equal500,it2,400,28.369,29.855,174.189,27.791
+4leg,med_mixed,t1,400,56.015,59.858,34.026,58.77
+4leg,med_mixed,it2,400,56.519,59.995,102.258,58.084

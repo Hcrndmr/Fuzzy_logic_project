@@ -1,0 +1,1 @@
+KM mean=54.277 NT mean=54.617 Wilcoxon p=0.0001 (n=360 paired runs)

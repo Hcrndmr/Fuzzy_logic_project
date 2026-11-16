@@ -1,0 +1,13 @@
+geo,comparison,ours_%,paper_% (HTSC)
+3leg,FT->T1,10.4,8.64
+3leg,FT->FPA,-0.42,10.73
+3leg,FT->IT2,10.32,11.59
+3leg,T1->FPA,-12.35,1.67
+3leg,T1->IT2,-0.09,2.7
+3leg,FPA->IT2,10.68,0.8
+4leg,FT->T1,10.66,19.81
+4leg,FT->FPA,0.55,20.27
+4leg,FT->IT2,10.32,23.99
+4leg,T1->FPA,-12.11,0.42
+4leg,T1->IT2,-0.46,5.26
+4leg,FPA->IT2,9.67,4.83

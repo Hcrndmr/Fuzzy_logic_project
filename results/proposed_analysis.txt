@@ -1,0 +1,29 @@
+        mean_gain_vs_uniform_%  std_over_runs_%  mean_test_delay  mean_time_s  mean_rank  p_vs_CSA(Holm)
+method                                                                                                  
+CSA                     12.345            0.299           54.215       20.958      1.833             NaN
+FPA                     11.519            0.185           54.512       22.173      3.278           0.002
+PSO                     11.234            0.134           54.600       20.323      3.444           0.000
+DE                      12.442            0.168           54.162       20.973      1.444           0.304 
+Friedman 33.0 3.220672708117698e-07
+   sigma  T1_gain_%  IT2_gain_%  T1_degr_%  IT2_degr_%  p_wilcoxon(18 scen.)
+0   0.00     10.352      10.174      0.000       0.000                 0.799
+1   0.10      9.587       9.601      0.928       0.663                 0.832
+2   0.20      9.084       9.076      1.478       1.303                 0.865
+3   0.30      7.741       8.023      3.046       2.525                 1.000
+4   0.50      5.687       6.290      5.403       4.530                 0.442
+5   0.75      3.658       4.237      7.750       6.904                 0.799
+geo   reduction
+3leg  km           33.684
+      nt           33.937
+4leg  km           74.869
+      nt           75.296
+Name: delay, dtype: float64 6.221883574471901e-05
+    geo      scenario kind  iters  train_delay  test_delay  time_s  test_delay_100it
+0  3leg  med_equal800   t1    400        32.23       31.63   35.21             30.22
+1  3leg  med_equal800  it2    400        32.20       30.45  111.54             31.93
+2  3leg    high_mixed   t1    400        55.81       58.40   25.49             57.63
+3  3leg    high_mixed  it2    400        54.94       57.36   72.93             59.00
+4  4leg  med_equal500   t1    400        26.96       29.36   52.97             27.29
+5  4leg  med_equal500  it2    400        28.37       29.86  174.19             27.79
+6  4leg     med_mixed   t1    400        56.02       59.86   34.03             58.77
+7  4leg     med_mixed  it2    400        56.52       60.00  102.26             58.08

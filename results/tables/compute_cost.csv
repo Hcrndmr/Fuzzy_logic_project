@@ -1,0 +1,5 @@
+system,inference_us_per_call,sim_ms_per_900s_run
+Type-1 Sugeno,14.48,0.75
+IT2 Sugeno (Karnik-Mendel),51.31,2.19
+IT2 Sugeno (Nie-Tan),34.65,1.45
+Fixed time (no inference),0.0,0.23
